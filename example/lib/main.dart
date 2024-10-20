@@ -50,6 +50,13 @@ class _MyAppState extends State<MyApp> {
             tips = 'disconnect success';
           });
           break;
+        case BluetoothPrint.STATE_ON:
+          // Indicates the local Bluetooth adapter is on, and ready for use.
+          setState(() {
+            _connected = false;
+            tips = 'bluetooth on';
+          });
+          break;
         default:
           break;
       }

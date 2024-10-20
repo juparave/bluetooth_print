@@ -7,6 +7,8 @@ import 'bluetooth_print_model.dart';
 
 class BluetoothPrint {
   static const String NAMESPACE = 'bluetooth_print';
+  static const int STATE_OFF = 10;
+  static const int STATE_ON = 12;
   static const int CONNECTED = 1;
   static const int DISCONNECTED = 0;
 
