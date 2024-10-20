@@ -22,7 +22,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdk 31
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
