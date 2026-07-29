@@ -348,6 +348,7 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
       deviceConnFactoryManager.closePort();
       deviceConnFactoryManager.mPort = null;
     }
+    threadPool = null;
 
     return true;
   }
