@@ -180,6 +180,9 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
         stopScan();
         result.success(null);
         break;
+      case "getDevices":
+        getDevices(result);
+        break;
       case "connect":
         connect(call, result);
         break;
@@ -362,6 +365,7 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
     final DeviceConnFactoryManager deviceConnFactoryManager = DeviceConnFactoryManager.getDeviceConnFactoryManagers().get(curMacAddress);
     if (deviceConnFactoryManager == null || !deviceConnFactoryManager.getConnState()) {
       result.error("not connect", "state not right", null);
+      return;
     }
 
     threadPool = ThreadPool.getInstantiation();
@@ -415,6 +419,7 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
           }
         }
       });
+      result.success(true);
     }else{
       result.error("please add config or data", "", null);
     }

@@ -34,6 +34,7 @@ public class PrintContent {
                   String content = (String)m.get("content");
                   int align = (int)(m.get("align")==null?0:m.get("align"));
                   int size = (int)(m.get("size")==null?3:m.get("size"));
+                  int barcodeWidth = (int)(m.get("barcodeWidth")==null?2:m.get("barcodeWidth"));
                   int weight = (int)(m.get("weight")==null?0:m.get("weight"));
                   int width = (int)(m.get("width")==null?0:m.get("width"));
                   int height = (int)(m.get("height")==null?0:m.get("height"));
@@ -75,8 +76,8 @@ public class PrintContent {
                         // 设置条码可识别字符位置在条码下方
                         // 设置条码高度为60点
                         esc.addSetBarcodeHeight((byte) 60);
-                        // 设置条码宽窄比为2
-                        esc.addSetBarcodeWidth((byte) 2);
+                        // 设置条码模块宽度
+                        esc.addSetBarcodeWidth((byte) barcodeWidth);
                         // 打印Code128码
                         esc.addCODE128(esc.genCodeB(content));
                   }else if("qrcode".equals(type)){

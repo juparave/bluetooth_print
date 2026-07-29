@@ -22,6 +22,7 @@ class LineText {
       {this.type, //text,barcode,qrcode,image(base64 string)
       this.content,
       this.size = 0,
+      this.barcodeWidth = 2,
       this.align = ALIGN_LEFT,
       this.weight = 0, //0,1
       this.width = 0, //0,1
@@ -50,6 +51,9 @@ class LineText {
 
   /// ['qrcode'] qrcode size ,only when type is qrcode
   final int? size;
+
+  /// ['barcode'] module width, normally 1-6
+  final int? barcodeWidth;
 
   /// ['text'] text align
   final int? align;

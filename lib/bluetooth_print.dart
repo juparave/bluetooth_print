@@ -120,6 +120,13 @@ class BluetoothPrint {
     _isScanning.add(false);
   }
 
+  Future<List<BluetoothDevice>> get bondedDevices async {
+    final devices = await _channel.invokeListMethod<Map>('getDevices') ?? [];
+    return devices
+        .map((device) => BluetoothDevice.fromJson(Map<String, dynamic>.from(device)))
+        .toList();
+  }
+
   Future<dynamic> connect(BluetoothDevice device) => _channel.invokeMethod('connect', device.toJson());
 
   Future<dynamic> disconnect() => _channel.invokeMethod('disconnect');
