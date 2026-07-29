@@ -315,7 +315,7 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
 
       disconnect();
 
-      new DeviceConnFactoryManager.Build()
+      final DeviceConnFactoryManager device = new DeviceConnFactoryManager.Build()
               //设置连接方式
               .setConnMethod(DeviceConnFactoryManager.CONN_METHOD.BLUETOOTH)
               //设置连接的蓝牙mac地址
@@ -327,11 +327,19 @@ public class BluetoothPrintPlugin implements FlutterPlugin, ActivityAware, Metho
       threadPool.addSerialTask(new Runnable() {
         @Override
         public void run() {
-          DeviceConnFactoryManager.getDeviceConnFactoryManagers().get(address).openPort();
+          try {
+            device.openPort();
+            boolean connected = device.getConnState();
+            if (!connected) {
+              threadPool = null;
+            }
+            result.success(connected);
+          } catch (Exception exception) {
+            threadPool = null;
+            result.error("connection_failed", exception.getMessage(), null);
+          }
         }
       });
-
-      result.success(true);
     } else {
       result.error("******************* invalid_argument", "argument 'address' not found", null);
     }
